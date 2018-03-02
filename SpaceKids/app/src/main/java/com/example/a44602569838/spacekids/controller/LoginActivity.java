@@ -1,7 +1,9 @@
-package com.example.a44602569838.spacekids;
+package com.example.a44602569838.spacekids.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.a44602569838.spacekids.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -9,7 +11,5 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        String Login = "Adilson";
     }
 }

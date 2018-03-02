@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">SpaceKids</string>
+    <string name="title_activity_fase1">fase1</string>
+    <string name="title_activity_fase2">fase2</string>
+
+    <string name="nome">Nome</string>
+    <string name="email">E-Mail</string>
+    <string name="confirmacao">Confirmação da Senha</string>
+    <string name="senha">Senha</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="login">Login</string>
+    <string name="voltar">Voltar</string>
+
 </resources>
