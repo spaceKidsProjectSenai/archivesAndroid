@@ -20,8 +20,8 @@ public class Fase1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fase1);
 
-        iv1 = (ImageView) findViewById(R.id.imgFase1);
-        iv2 = (ImageView) findViewById(R.id.img2Fase1);
+        iv1 = (ImageView) findViewById(R.id.slide_1);
+        iv2 = (ImageView) findViewById(R.id.slide_1);
 
         iv1.setOnTouchListener(new ChoiceTouchListener());iv1.setOnDragListener(new ChoiceDragListener());
         iv2.setOnTouchListener(new ChoiceTouchListener());iv2.setOnDragListener(new ChoiceDragListener());
@@ -65,7 +65,7 @@ public class Fase1 extends AppCompatActivity {
                     case DragEvent.ACTION_DROP:
 
                         ImageView imageView = (ImageView) dragEvent.getLocalState();
-                        ((ImageView)view).setImageDrawable(getResources().getDrawable(R.drawable.sleep_icon));
+                        ((ImageView)view).setImageDrawable(getResources().getDrawable(R.drawable.slide2));
                         ((ImageView)imageView).setImageDrawable(null);
 
                         break;
