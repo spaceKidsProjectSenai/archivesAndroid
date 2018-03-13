@@ -1,12 +1,17 @@
 package com.example.a44602569838.spacekids.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 44602569838 on 01/03/2018.
  */
 
 public class Login {
+    @SerializedName("email")
     private String email;
+    @SerializedName("senha")
     private String senha;
+    @SerializedName("nome")
     private String nome;
 
     public Login() {
