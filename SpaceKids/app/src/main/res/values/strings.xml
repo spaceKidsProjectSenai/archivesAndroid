@@ -11,5 +11,6 @@
     <string name="cadastro">Cadastro</string>
     <string name="login">Login</string>
     <string name="voltar">Voltar</string>
+    <string name="todo">TODO</string>
 
 </resources>
