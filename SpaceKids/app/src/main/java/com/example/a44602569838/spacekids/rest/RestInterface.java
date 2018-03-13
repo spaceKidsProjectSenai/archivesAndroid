@@ -15,5 +15,5 @@ import retrofit2.http.HEAD;
 public interface RestInterface {
 
     @GET("/api/Pai/cadastrar")
-    Call<ResponseBody> repoContributors(@Body Login login);
+    Call<ResponseBody> cadastrarPai(@Body Login login);
 }

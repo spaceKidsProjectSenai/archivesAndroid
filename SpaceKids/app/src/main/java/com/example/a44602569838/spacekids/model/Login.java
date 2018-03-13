@@ -7,7 +7,10 @@ package com.example.a44602569838.spacekids.model;
 public class Login {
     private String email;
     private String senha;
+    private String nome;
 
+    public Login() {
+    }
 
     public String getEmail() {
         return email;
@@ -25,11 +28,20 @@ public class Login {
         this.senha = senha;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
         return "Login{" +
                 "email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 }
