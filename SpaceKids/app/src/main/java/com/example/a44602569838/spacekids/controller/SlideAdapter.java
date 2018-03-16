@@ -38,9 +38,9 @@ public class SlideAdapter extends PagerAdapter{
     };
 
     public String[] slide_descs = {
-      "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XV",
-      "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XV",
-      "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XV"
+      "Na Space Kids, você pode proporcionar muita diversão para o seu filho.",
+      "                    Acompanhe o desempenho do seu filho.",
+      "         Cadastre-se e adicione quantos jogadores quiser"
 
     };
 
@@ -63,7 +63,7 @@ public class SlideAdapter extends PagerAdapter{
         View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
 
-        ImageView slideImageView = view.findViewById(R.id.slide_1);
+        ImageView slideImageView = view.findViewById(R.id.jogo_1);
         TextView slideHeading = view.findViewById(R.id.slide_desc);
         TextView slideDescription = view.findViewById(R.id.slide_desc);
 

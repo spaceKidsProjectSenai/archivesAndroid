@@ -40,6 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
                     editNome.setError("Campo não preenchido");
                 } else if (editEmail.getEditableText().toString().trim().isEmpty()) {
                     editEmail.setError("Campo não preenchido");
+                    
                 } else if (editSenha.getEditableText().toString().trim().isEmpty()) {
                     editSenha.setError("Campo não preenchido");
                 } else if (editConfirmacao.getEditableText().toString().trim().isEmpty()) {

@@ -6,7 +6,7 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/slide_1"
+        android:id="@+id/jogo_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,11 +19,11 @@
         android:id="@+id/slide_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/slide_1"
+        android:layout_alignBottom="@+id/jogo_1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="28dp"
-        android:text="Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XV"
-        android:textAlignment="center"
+        android:text="Na Space Kids, você pode proporcionar muita diversão para o seu filho."
+        android:gravity="center"
         android:textColor="#A8A9B9" />
 </RelativeLayout>
