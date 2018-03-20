@@ -1,5 +1,6 @@
 package com.example.a44602569838.spacekids.game;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,27 +9,44 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
 
 public class Fase1 extends AppCompatActivity {
 
-    ImageView   iv1, iv2;
+    ImageView num6_vermelho, num6_verde, num6_azul;
+    ImageView num_resposta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fase1);
+        findViews();
 
+    }
 
-        iv1 = (ImageView) findViewById(R.id.jogo_1);
-        iv2 = (ImageView) findViewById(R.id.jogo_2);
+    public void findViews(){
+        num6_vermelho = findViewById(R.id.numero_seis);
+        num6_verde = findViewById(R.id.numero_seis_verde);
+        num6_azul = findViewById(R.id.numero_seis_azul);
 
+        num_resposta  = findViewById(R.id.numero_q_3);
 
-        iv1.setOnTouchListener(new ChoiceTouchListener());
-        iv1.setOnDragListener(new ChoiceDragListener(1));
-        iv2.setOnTouchListener(new ChoiceTouchListener());
-        iv2.setOnDragListener(new ChoiceDragListener(2));
+        //Evento de arrastar e soltar
+        num6_vermelho.setOnTouchListener(new ChoiceTouchListener());
+        num6_vermelho.setOnDragListener(new ChoiceDragListener(2));
+
+        num6_verde.setOnTouchListener(new ChoiceTouchListener());
+        num6_verde.setOnDragListener(new ChoiceDragListener(3));
+
+        num6_azul.setOnTouchListener(new ChoiceTouchListener());
+        num6_azul.setOnDragListener(new ChoiceDragListener(6));
+
+        num_resposta.setOnTouchListener(new ChoiceTouchListener());
+        num_resposta.setOnDragListener(new ChoiceDragListener(999));
+
 
     }
 
@@ -37,64 +55,64 @@ public class Fase1 extends AppCompatActivity {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
 
-            if((motionEvent.getAction() == MotionEvent.ACTION_DOWN) && ((ImageView)view).getDrawable()!= null) {
+            if ((motionEvent.getAction() == MotionEvent.ACTION_DOWN) && ((ImageView) view).getDrawable() != null) {
                 ClipData data = ClipData.newPlainText("", "");
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(data, shadowBuilder, view, 0);
 
                 return true;
-            } else {}
+            } else {
+            }
             return false;
         }
     }
 
-        private class ChoiceDragListener implements View.OnDragListener{
+    private class ChoiceDragListener implements View.OnDragListener {
 
-            private int id;
+        private int id;
 
-            public ChoiceDragListener(int id) {
-                this.id = id;
-            }
+        public ChoiceDragListener(int id) {
+            this.id = id;
+        }
 
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-                switch (dragEvent.getAction()) {
-                    case DragEvent.ACTION_DRAG_STARTED:
+        @Override
+        public boolean onDrag(View view, DragEvent dragEvent) {
+            switch (dragEvent.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
 
                     break;
 
-                    case DragEvent.ACTION_DRAG_ENTERED:
+                case DragEvent.ACTION_DRAG_ENTERED:
 
-                        break;
+                    break;
 
-                    case DragEvent.ACTION_DRAG_EXITED:
+                case DragEvent.ACTION_DRAG_EXITED:
 
-                        break;
+                    break;
 
-                    case DragEvent.ACTION_DROP:
-                        ImageView imageView = (ImageView) dragEvent.getLocalState();
+                case DragEvent.ACTION_DROP:
+                    ImageView imageView = (ImageView) dragEvent.getLocalState();
 
-                        if(imageView.getId() != R.id.jogo_1) {
-                            imageView.setImageDrawable(null);
-                        }else{
-                            ((ImageView) view).setImageDrawable(getResources().getDrawable(R.drawable.slide1));
-                        }
-
-
-                        String TAG = "QuickNotesMainActivity";
-                        Log.d(TAG, String.valueOf(id));
+                    if (imageView.getId() != R.id.numero_seis) {
+                        Toast.makeText(Fase1.this, "RESPOSTA ERRADA TENTE NOVAMENTE", Toast.LENGTH_SHORT).show();
+                    } else {
+                        ((ImageView) view).setImageDrawable(getResources().getDrawable(R.drawable.cards4_fase2));
+                    }
 
 
-                        break;
-
-                    case DragEvent.ACTION_DRAG_ENDED:
-
+                    String TAG = "QuickNotesMainActivity";
+                    Log.d(TAG, String.valueOf(id));
 
 
-                        break;
-                }
-                return true;
+                    break;
+
+                case DragEvent.ACTION_DRAG_ENDED:
+
+
+                    break;
             }
+            return true;
         }
+    }
 
 }

@@ -8,27 +8,106 @@
     tools:context="com.example.a44602569838.spacekids.game.Fase1">
 
 
-    <ImageView
-        android:id="@+id/jogo_1"
-        android:layout_width="248dp"
-        android:layout_height="168dp"
-        android:layout_marginBottom="240dp"
-        android:layout_marginTop="37dp"
-        app:layout_constraintBottom_toTopOf="@+id/jogo_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        app:srcCompat="@drawable/slide3" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="442dp"
+        android:gravity="center"
+        android:text="@string/acerte_a_sequ_ncia_de_cores"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/numero_seis"
+        app:layout_constraintEnd_toStartOf="@+id/numero_q_3"
+        app:layout_constraintStart_toStartOf="@+id/numero_q_3"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/jogo_2"
-        android:layout_width="167dp"
+        android:id="@+id/numero_seis_verde"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginStart="53dp"
+        android:src="@drawable/cards5_fase2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/numero_seis_azul"
+        app:layout_constraintStart_toEndOf="@+id/numero_seis"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/numero_seis"
+        android:layout_width="75dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="51dp"
-        android:layout_marginStart="120dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="40dp"
+        android:src="@drawable/cards4_fase2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jogo_1"
-        app:srcCompat="@drawable/slide2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="40dp" />
+
+    <ImageView
+        android:id="@+id/numero_seis_azul"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/cards6_fase2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="40dp" />
+
+
+    <ImageView
+        android:id="@+id/numero_q_1"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="116dp"
+        android:gravity="center"
+        android:src="@drawable/cards1_fase2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="30dp" />
+
+    <ImageView
+        android:id="@+id/numero_q_2"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="116dp"
+        android:src="@drawable/cards2_fase2"
+        app:layout_constraintEnd_toStartOf="@+id/numero_q_3"
+        app:layout_constraintStart_toEndOf="@+id/numero_q_1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/numero_q_3"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="116dp"
+        android:src="@drawable/cards_interrogacao_red"
+        app:layout_constraintEnd_toStartOf="@+id/numero_q_4"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="25dp" />
+
+    <ImageView
+        android:id="@+id/numero_q_4"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="116dp"
+        android:src="@drawable/cards3_fase2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="30dp" />
+
 </android.support.constraint.ConstraintLayout>
