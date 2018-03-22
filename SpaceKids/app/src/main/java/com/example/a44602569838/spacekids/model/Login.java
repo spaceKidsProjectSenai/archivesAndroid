@@ -17,6 +17,12 @@ public class Login {
     public Login() {
     }
 
+    public Login(String email, String senha, String nome) {
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+    }
+
     public String getEmail() {
         return email;
     }

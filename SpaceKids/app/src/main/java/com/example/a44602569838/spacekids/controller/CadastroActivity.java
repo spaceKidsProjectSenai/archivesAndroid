@@ -40,7 +40,6 @@ public class CadastroActivity extends AppCompatActivity {
                     editNome.setError("Campo não preenchido");
                 } else if (editEmail.getEditableText().toString().trim().isEmpty()) {
                     editEmail.setError("Campo não preenchido");
-                    
                 } else if (editSenha.getEditableText().toString().trim().isEmpty()) {
                     editSenha.setError("Campo não preenchido");
                 } else if (editConfirmacao.getEditableText().toString().trim().isEmpty()) {
@@ -48,7 +47,7 @@ public class CadastroActivity extends AppCompatActivity {
                 } else if (!editConfirmacao.getEditableText().toString().trim().equals(editSenha.getEditableText().toString())) {
                     editConfirmacao.setError("Esse campo deve ser igual ao campo senha");
                 } else {
-                   cadastrarPai(new Login());
+                   cadastrarPai(new Login(editEmail.getEditableText().toString(), editSenha.getEditableText().toString(), editNome.getText().toString()));
                     Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -75,20 +74,18 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void cadastrarPai(Login l) {
-        l = new Login();
-        l.setEmail(editEmail.getEditableText().toString());
-        l.setSenha(editSenha.getEditableText().toString());
-        l.setNome(editNome.getEditableText().toString());
-
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
 
         Retrofit retrofit = builder.build();
         RestInterface restInterface = retrofit.create(RestInterface.class);
 
-        Call<ResponseBody> call = restInterface.cadastrarPai(l);
+        Call<ResponseBody> call = restInterface.LoginCadastro(l);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(CadastroActivity.this, String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

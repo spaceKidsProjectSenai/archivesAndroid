@@ -7,6 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
+import retrofit2.http.POST;
 
 /**
  * Created by 44602569838 on 13/03/2018.
@@ -14,6 +15,6 @@ import retrofit2.http.HEAD;
 
 public interface RestInterface {
 
-    @GET("/api/Pai/cadastrar")
-    Call<ResponseBody> cadastrarPai(@Body Login login);
+    @POST("/api/Login/cadastrar")
+    Call<ResponseBody> LoginCadastro(@Body Login login);
 }

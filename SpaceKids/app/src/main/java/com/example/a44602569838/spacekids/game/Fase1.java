@@ -27,25 +27,25 @@ public class Fase1 extends AppCompatActivity {
 
     }
 
-    public void findViews(){
+    public void findViews() {
         num6_vermelho = findViewById(R.id.numero_seis);
         num6_verde = findViewById(R.id.numero_seis_verde);
         num6_azul = findViewById(R.id.numero_seis_azul);
 
-        num_resposta  = findViewById(R.id.numero_q_3);
+        num_resposta = findViewById(R.id.numero_q_3);
 
         //Evento de arrastar e soltar
         num6_vermelho.setOnTouchListener(new ChoiceTouchListener());
-        num6_vermelho.setOnDragListener(new ChoiceDragListener(2));
+        num6_vermelho.setOnDragListener(new ChoiceDragListener());
 
         num6_verde.setOnTouchListener(new ChoiceTouchListener());
-        num6_verde.setOnDragListener(new ChoiceDragListener(3));
+        num6_verde.setOnDragListener(new ChoiceDragListener());
 
         num6_azul.setOnTouchListener(new ChoiceTouchListener());
-        num6_azul.setOnDragListener(new ChoiceDragListener(6));
+        num6_azul.setOnDragListener(new ChoiceDragListener());
 
         num_resposta.setOnTouchListener(new ChoiceTouchListener());
-        num_resposta.setOnDragListener(new ChoiceDragListener(999));
+        num_resposta.setOnDragListener(new ChoiceDragListener());
 
 
     }
@@ -61,7 +61,6 @@ public class Fase1 extends AppCompatActivity {
                 view.startDrag(data, shadowBuilder, view, 0);
 
                 return true;
-            } else {
             }
             return false;
         }
@@ -69,25 +68,19 @@ public class Fase1 extends AppCompatActivity {
 
     private class ChoiceDragListener implements View.OnDragListener {
 
-        private int id;
-
-        public ChoiceDragListener(int id) {
-            this.id = id;
-        }
-
         @Override
         public boolean onDrag(View view, DragEvent dragEvent) {
             switch (dragEvent.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
-
+                    Log.d("", "FOI DROPADO NO ACTION_DRAG_STARTED");
                     break;
 
                 case DragEvent.ACTION_DRAG_ENTERED:
-
+                    Log.d("", "FOI DROPADO NO ACTION_DRAG_ENTERED");
                     break;
 
                 case DragEvent.ACTION_DRAG_EXITED:
-
+                    Log.d("", "FOI DROPADO NO ACTION_DRAG_EXITED");
                     break;
 
                 case DragEvent.ACTION_DROP:
@@ -98,17 +91,10 @@ public class Fase1 extends AppCompatActivity {
                     } else {
                         ((ImageView) view).setImageDrawable(getResources().getDrawable(R.drawable.cards4_fase2));
                     }
-
-
-                    String TAG = "QuickNotesMainActivity";
-                    Log.d(TAG, String.valueOf(id));
-
-
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-
-
+                    Log.d("", String.valueOf(view.getId()));
                     break;
             }
             return true;
