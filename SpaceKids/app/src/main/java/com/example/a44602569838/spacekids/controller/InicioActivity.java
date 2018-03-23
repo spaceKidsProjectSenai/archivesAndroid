@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.a44602569838.spacekids.R;
 
-public class InicioActivity extends AppCompatActivity {
+public class InicioActivity extends BaseActivity {
 
     private LinearLayout mDotLayout;
 
@@ -23,7 +23,11 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        inicializarComponentes();
+    }
 
+    @Override
+    public void inicializarComponentes() {
         //FindViwes
         ViewPager mSlideViewPager = findViewById(R.id.slideViewPager);
         mDotLayout = findViewById(R.id.dotsLayout);

@@ -1,11 +1,9 @@
 package com.example.a44602569838.spacekids.controller;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CadastroActivity extends AppCompatActivity {
+public class CadastroActivity extends BaseActivity {
 
     EditText editNome, editEmail, editSenha, editConfirmacao;
     Button btnCadastrar;
@@ -32,6 +30,11 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        inicializarComponentes();
+    }
+
+    @Override
+    public void inicializarComponentes() {
         findView();
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +50,7 @@ public class CadastroActivity extends AppCompatActivity {
                 } else if (!editConfirmacao.getEditableText().toString().trim().equals(editSenha.getEditableText().toString())) {
                     editConfirmacao.setError("Esse campo deve ser igual ao campo senha");
                 } else {
-                   cadastrarPai(new Login(editEmail.getEditableText().toString(), editSenha.getEditableText().toString(), editNome.getText().toString()));
+                    cadastrarPai(new Login(editEmail.getEditableText().toString(), editSenha.getEditableText().toString(), editNome.getText().toString()));
                     Toast.makeText(CadastroActivity.this, "Cadastrado com Sucesso", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -79,11 +82,11 @@ public class CadastroActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
         RestInterface restInterface = retrofit.create(RestInterface.class);
 
-        Call<ResponseBody> call = restInterface.LoginCadastro(l);
+        Call<ResponseBody> call = restInterface.cadastrarlogin(l);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(CadastroActivity.this, String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                 }
             }

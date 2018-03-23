@@ -33,7 +33,7 @@
                 android:id="@+id/email_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/senha"
+                android:hint="@string/email"
                 android:maxLength="255"
                 tools:ignore="TextFields" />
 
@@ -52,7 +52,7 @@
                 android:id="@+id/senha_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="@string/senha"
                 android:maxLength="255"
                 tools:ignore="TextFields" />
 
@@ -66,6 +66,7 @@
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/amareloDark"
             android:fontFamily="verdana"
+            android:onClick="logarOnClick"
             android:text="@string/login"
             tools:ignore="UnusedAttribute" />
 
