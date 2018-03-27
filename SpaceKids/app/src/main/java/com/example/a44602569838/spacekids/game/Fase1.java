@@ -85,11 +85,14 @@ public class Fase1 extends AppCompatActivity {
 
                 case DragEvent.ACTION_DROP:
                     ImageView imageView = (ImageView) dragEvent.getLocalState();
+                    ImageView ouvinte = (ImageView) view;
 
                     if (imageView.getId() != R.id.numero_seis) {
                         Toast.makeText(Fase1.this, "RESPOSTA ERRADA TENTE NOVAMENTE", Toast.LENGTH_SHORT).show();
+                    } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis_verde) {
+                            Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
                     } else {
-                        ((ImageView) view).setImageDrawable(getResources().getDrawable(R.drawable.cards4_fase2));
+                        ouvinte.setImageDrawable(getResources().getDrawable(R.drawable.cards4_fase2));
                     }
                     break;
 
