@@ -19,7 +19,7 @@ public interface RestInterface {
     @POST("/api/Login/cadastrar")
     Call<ResponseBody> cadastrarlogin(@Body Login login);
 
-    @GET("/api/Login/login")
+    @POST("/api/Login/autenticar")
     Call<ResponseBody> logar();
 
     /* Fim API's Relacionadas ao Login */

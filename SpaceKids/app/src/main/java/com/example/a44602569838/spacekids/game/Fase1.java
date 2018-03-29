@@ -2,6 +2,10 @@ package com.example.a44602569838.spacekids.game;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +53,6 @@ public class Fase1 extends AppCompatActivity {
 
 
     }
-
     private final class ChoiceTouchListener implements View.OnTouchListener {
 
         @Override
@@ -90,18 +93,19 @@ public class Fase1 extends AppCompatActivity {
                     if (imageView.getId() != R.id.numero_seis) {
                         Toast.makeText(Fase1.this, "RESPOSTA ERRADA TENTE NOVAMENTE", Toast.LENGTH_SHORT).show();
                     } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis_verde) {
-                            Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
+                        Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
                     } else {
-                        ouvinte.setImageDrawable(getResources().getDrawable(R.drawable.cards4_fase2));
+                        Toast.makeText(Fase1.this, "ACEETOU Parabéns", Toast.LENGTH_SHORT).show();
+                        Fase1.this.finish();
+                        Intent i = new Intent(getBaseContext(), Fase2.class);
+                        startActivity(i);
                     }
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
-                    Log.d("", String.valueOf(view.getId()));
                     break;
             }
             return true;
         }
     }
-
 }

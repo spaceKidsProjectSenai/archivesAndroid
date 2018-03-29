@@ -1,9 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a44602569838.spacekids.game.Fase2">
+    android:background="@drawable/background_game"
+    android:orientation="vertical"
+    tools:context="com.example.a44602569838.spacekids.game.Fase1">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/acerte_a_sequ_ncia_de_cores"
+        android:textSize="36sp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="150dip"
+        android:layout_below="@id/textView">
+
+        <ImageView
+            android:id="@+id/numero_q_1"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:src="@drawable/cards1_fase1" />
+
+        <ImageView
+            android:id="@+id/numero_q_2"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cards2_fase1" />
+
+        <ImageView
+            android:id="@+id/numero_q_3"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cards_interrogacao_green" />
+
+        <ImageView
+            android:id="@+id/numero_q_4"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cards3_fase1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/numero_seis_verde"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cards5_fase1"
+            tools:ignore="MissingConstraints"
+            android:layout_weight="0.30"/>
+
+        <ImageView
+            android:id="@+id/numero_seis"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cards4_fase1"
+            tools:ignore="MissingConstraints"
+            android:layout_weight="0.40"/>
+
+        <ImageView
+            android:id="@+id/numero_seis_azul"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:src="@drawable/cards6_fase1"
+            tools:ignore="MissingConstraints"
+            android:layout_weight="0.30"/>
+
+    </LinearLayout>
+</RelativeLayout>
