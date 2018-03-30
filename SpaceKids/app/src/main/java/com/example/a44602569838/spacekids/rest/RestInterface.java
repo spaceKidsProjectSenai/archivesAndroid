@@ -3,6 +3,7 @@ package com.example.a44602569838.spacekids.rest;
 import com.example.a44602569838.spacekids.model.Cricanca;
 import com.example.a44602569838.spacekids.model.Desempenho;
 import com.example.a44602569838.spacekids.model.Fase;
+import com.example.a44602569838.spacekids.model.Logar;
 import com.example.a44602569838.spacekids.model.Login;
 
 import okhttp3.ResponseBody;
@@ -20,7 +21,7 @@ public interface RestInterface {
     Call<ResponseBody> cadastrarlogin(@Body Login login);
 
     @POST("/api/Login/autenticar")
-    Call<ResponseBody> logar();
+    Call<ResponseBody> logar(@Body Logar logar);
 
     /* Fim API's Relacionadas ao Login */
 

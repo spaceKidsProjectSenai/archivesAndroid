@@ -2,11 +2,26 @@ package com.example.a44602569838.spacekids.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.example.a44602569838.spacekids.R;
+import com.example.a44602569838.spacekids.model.Logar;
+import com.example.a44602569838.spacekids.rest.RestInterface;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends BaseActivity {
 
@@ -41,6 +56,33 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void logar() {
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        RestInterface restInterface = retrofit.create(RestInterface.class);
 
+        Call<ResponseBody> call = restInterface.logar(new Logar(editEmail.getEditableText().toString(), editSenha.getEditableText().toString()));
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String token = jsonObject.getString("acessToken");
+                        Log.d("token", token);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

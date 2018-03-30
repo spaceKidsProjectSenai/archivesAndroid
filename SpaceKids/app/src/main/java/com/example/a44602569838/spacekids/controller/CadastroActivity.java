@@ -78,7 +78,6 @@ public class CadastroActivity extends BaseActivity {
 
     public void cadastrarPai(Login l) {
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
-
         Retrofit retrofit = builder.build();
         RestInterface restInterface = retrofit.create(RestInterface.class);
 
