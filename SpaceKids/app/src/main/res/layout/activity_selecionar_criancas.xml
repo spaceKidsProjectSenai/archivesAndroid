@@ -4,8 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_game"
+    android:gravity="center"
     tools:context="com.example.a44602569838.spacekids.controller.SelecionarCriancasActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvCriancas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="5dp" />
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -14,7 +26,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="15dp"
-        android:src="@drawable/ic_add"
-        android:onClick="cadastrarCriancasOnClick"/>
+        android:onClick="cadastrarCriancasOnClick"
+        android:src="@drawable/ic_add" />
 
 </RelativeLayout>
