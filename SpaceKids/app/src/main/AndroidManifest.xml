@@ -22,6 +22,8 @@
         <activity android:name=".controller.LoginActivity" />
         <activity android:name=".game.Fase1" />
         <activity android:name=".game.Fase2" />
+        <activity android:name=".controller.HomeActivity" />
+        <activity android:name=".controller.SelecionarCriancasActivity"></activity>
     </application>
 
 </manifest>
