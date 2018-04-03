@@ -24,9 +24,12 @@
     <string name="_3">3</string>
     <string name="interrogacao">\?</string>
     <string name="acerte_a_sequ_ncia_de_cores">Acerte a sequência de cores</string>
-    <string name="nomeCrianca">Nome:</string>
+    <string name="sexo" />
+    <string name="masculino">Masculino</string>
+    <string name="ninjas">Feminino</string>
     <string name="idade">Idade</string>
-    <string name="sexo">Sexo</string>
+    <string name="cadastrar_crianca">Cadastrar Criança</string>
+    <string name="cadastroCrianca">Cadastro Criança</string>
     <string name="jogar">Jogar</string>
 
 </resources>
