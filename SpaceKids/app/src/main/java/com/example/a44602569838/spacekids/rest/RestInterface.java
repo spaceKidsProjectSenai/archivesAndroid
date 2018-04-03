@@ -1,6 +1,6 @@
 package com.example.a44602569838.spacekids.rest;
 
-import com.example.a44602569838.spacekids.model.Cricanca;
+import com.example.a44602569838.spacekids.model.Crianca;
 import com.example.a44602569838.spacekids.model.Desempenho;
 import com.example.a44602569838.spacekids.model.Fase;
 import com.example.a44602569838.spacekids.model.Logar;
@@ -27,10 +27,10 @@ public interface RestInterface {
 
     /*API's Relacionadas a criança*/
 
-    @POST("api/Cricanca/cadastrar")
-    Call<ResponseBody> cadastrarCrianca(@Body Cricanca cricanca);
+    @POST("api/Crianca/cadastrar")
+    Call<ResponseBody> cadastrarCrianca(@Body Crianca crianca);
 
-    @GET("/api/Cricanca/listar")
+    @GET("/api/Crianca/listar")
     Call<ResponseBody> listarCricancas();
 
     /*Fim API's Relacionadas a criança*/
@@ -41,12 +41,5 @@ public interface RestInterface {
     Call<ResponseBody> cadastrarDesempenho(@Body Desempenho desempenho);
 
     /* Fim API's Relacionadas ao Desempenho*/
-
-    /* API's Relacionadas a Fase */
-
-    @POST("/api/Fase/cadastrar")
-    Call<ResponseBody> cadastrarFase(@Body Fase fase);
-
-    /* Fim API's Relacionadas a Fase*/
 
 }

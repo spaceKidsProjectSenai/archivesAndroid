@@ -1,6 +1,6 @@
 package com.example.a44602569838.spacekids.controller;
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,10 +75,12 @@ public class LoginActivity extends BaseActivity {
 
                         SharedPreferences tokenShared =  getSharedPreferences("spacekids", MODE_PRIVATE);
                         SharedPreferences.Editor editor = tokenShared.edit();
-                        editor.putString("token", token);
+                        editor.putString("token", "Bearer "+token);
                         editor.apply();
 
 
+                        Intent i = new Intent(getBaseContext(), HomeActivity.class);
+                        startActivity(i);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

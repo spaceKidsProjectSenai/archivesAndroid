@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.a44602569838.spacekids.R;
 import com.example.a44602569838.spacekids.game.Fase1;
-import com.example.a44602569838.spacekids.model.Cricanca;
+import com.example.a44602569838.spacekids.model.Crianca;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,9 @@ import java.util.ArrayList;
  */
 
 public class RVAdapterCriancas extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<Cricanca> cricancas;
+    private ArrayList<Crianca> cricancas;
 
-    public RVAdapterCriancas(ArrayList<Cricanca> cricancas) {
+    public RVAdapterCriancas(ArrayList<Crianca> cricancas) {
         this.cricancas = cricancas;
     }
 

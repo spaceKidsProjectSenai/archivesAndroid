@@ -90,10 +90,11 @@
 
 
     <Button
-        android:id="@+id/jogar"
+        android:id="@+id/cadastrarCrianca"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:onClick="cadastrarCriancaOnClick"
         android:backgroundTint="@color/amareloDark"
         android:text="@string/cadastrar_crianca" />
 

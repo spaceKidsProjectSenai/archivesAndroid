@@ -3,47 +3,44 @@ package com.example.a44602569838.spacekids.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 41183607806 on 22/03/2018.
  */
 
-public class Cricanca  implements Parcelable{
-    private String criancaId;
+public class Crianca  implements Parcelable{
+    @SerializedName("nome")
     private String nome;
+    @SerializedName("idade")
     private String idade;
+    @SerializedName("sexo")
     private String sexo;
+    @SerializedName("foto")
     private String foto;
 
-    public Cricanca() {
+    public Crianca() {
     }
 
-    private Cricanca(Parcel in) {
-        criancaId = in.readString();
+    private Crianca(Parcel in) {
         nome = in.readString();
         idade = in.readString();
         sexo = in.readString();
         foto = in.readString();
     }
 
-    public static final Creator<Cricanca> CREATOR = new Creator<Cricanca>() {
+    public static final Creator<Crianca> CREATOR = new Creator<Crianca>() {
         @Override
-        public Cricanca createFromParcel(Parcel in) {
-            return new Cricanca(in);
+        public Crianca createFromParcel(Parcel in) {
+            return new Crianca(in);
         }
 
         @Override
-        public Cricanca[] newArray(int size) {
-            return new Cricanca[size];
+        public Crianca[] newArray(int size) {
+            return new Crianca[size];
         }
     };
 
-    public String getCriancaId() {
-        return criancaId;
-    }
-
-    public void setCriancaId(String criancaId) {
-        this.criancaId = criancaId;
-    }
 
     public String getNome() {
         return nome;
@@ -80,7 +77,6 @@ public class Cricanca  implements Parcelable{
     @Override
     public String toString() {
         return "Cricanca{" +
-                "criancaId='" + criancaId + '\'' +
                 ", nome='" + nome + '\'' +
                 ", idade='" + idade + '\'' +
                 ", sexo='" + sexo + '\'' +
@@ -95,7 +91,6 @@ public class Cricanca  implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(criancaId);
         parcel.writeString(nome);
         parcel.writeString(idade);
         parcel.writeString(sexo);

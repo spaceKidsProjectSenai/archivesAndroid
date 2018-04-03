@@ -1,25 +1,16 @@
 package com.example.a44602569838.spacekids.controller;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.example.a44602569838.spacekids.R;
-import com.example.a44602569838.spacekids.adapters.RVAdapterCriancas;
-import com.example.a44602569838.spacekids.model.Cricanca;
+import com.example.a44602569838.spacekids.model.Crianca;
 import com.example.a44602569838.spacekids.rest.RestInterface;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CadastrarCricancaActivity extends AppCompatActivity {
 
-    Cricanca crianca;
+    Crianca crianca;
     //
     EditText nome;
     EditText idade;
@@ -49,7 +40,6 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         idade = findViewById(R.id.idade_crianca);
 
         //Chama o método que recupera as informações
-        informacoesCriancas();
     }
 
     public void onRadioButtonClicked(View view) {
@@ -69,7 +59,7 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
 
     public void informacoesCriancas() {
         //Cria criança
-        crianca = new Cricanca();
+        crianca = new Crianca();
 
         //Da o sexo da criança
         crianca.setSexo(sexo);
@@ -77,10 +67,12 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         crianca.setNome(nome.getEditableText().toString());
         //Recupera a idade da criança
         crianca.setIdade(idade.getEditableText().toString());
+
+        crianca.setFoto("sadsadsadsaduo");
     }
 
     public void cadastrarCrianca() {
-
+        informacoesCriancas();
         SharedPreferences preferences = getSharedPreferences("spacekids", MODE_PRIVATE);
         final String tokenAuth = preferences.getString("token", "");
 
@@ -90,7 +82,7 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
            return chain.proceed(request);
        }).build();
 
-        Retrofit.Builder builder = new Retrofit.Builder().client(defaultHttpClient).baseUrl("").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().client(defaultHttpClient).baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         RestInterface restInterface = retrofit.create(RestInterface.class);
 
@@ -110,4 +102,7 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         });
     }
 
+    public void cadastrarCriancaOnClick(View view) {
+        cadastrarCrianca();
+    }
 }

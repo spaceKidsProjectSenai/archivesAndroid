@@ -1,5 +1,6 @@
 package com.example.a44602569838.spacekids.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,8 @@ public class HomeActivity extends AppCompatActivity {
         jogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
+                startActivity(i);
             }
         });
     }
