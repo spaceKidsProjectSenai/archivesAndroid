@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         findViews();
 
-        //dwqdq
+        //dwqdqwwtt
         mView = new CatLoadingView();
         jogar.setOnClickListener(view -> {
             mView.show(getSupportFragmentManager(), "");
