@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
+import com.example.a44602569838.spacekids.game.Fase2;
 import com.example.a44602569838.spacekids.model.Logar;
 import com.example.a44602569838.spacekids.rest.RestInterface;
 
@@ -18,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,7 +81,7 @@ public class LoginActivity extends BaseActivity {
                         editor.putString("token", "Bearer "+token);
                         editor.apply();
 
-
+                        Toasty.success(LoginActivity.this, "Bem vindo ao SpaceKids.", Toast.LENGTH_SHORT, true).show();
                         Intent i = new Intent(getBaseContext(), HomeActivity.class);
                         startActivity(i);
                     }
@@ -91,7 +94,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toasty.error(LoginActivity.this, "Login ou senha incorretos.", Toast.LENGTH_SHORT, true).show();
             }
         });
     }

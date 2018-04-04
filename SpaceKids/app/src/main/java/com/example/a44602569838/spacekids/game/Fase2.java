@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
 
+import es.dmoral.toasty.Toasty;
+
 public class Fase2 extends AppCompatActivity {
 
     ImageView num6_vermelho, num6_verde, num6_azul;
@@ -84,11 +86,11 @@ public class Fase2 extends AppCompatActivity {
                     ImageView ouvinte = (ImageView) view;
 
                     if (imageView.getId() != R.id.numero_seis_verde) {
-                        Toast.makeText(Fase2.this, "RESPOSTA ERRADA TENTE NOVAMENTE", Toast.LENGTH_SHORT).show();
+                        Toasty.error(Fase2.this, "Resposta Errada !!!", Toast.LENGTH_SHORT, true).show();
                     } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis || ouvinte.getId() == R.id.numero_seis_verde) {
                         Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
                     } else {
-                        Toast.makeText(Fase2.this, "ACEETOU Parabéns", Toast.LENGTH_SHORT).show();
+                        Toasty.success(Fase2.this, "Resposta Correta !!!", Toast.LENGTH_SHORT, true).show();
                         Fase2.this.finish();
                         Intent i = new Intent(getBaseContext(), Fase2.class);
                         startActivity(i);

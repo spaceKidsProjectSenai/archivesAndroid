@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.a44602569838.spacekids.R;
+import com.roger.catloadinglibrary.CatLoadingView;
 
 public class HomeActivity extends AppCompatActivity {
 
     Button jogar;
+    CatLoadingView mView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,16 +21,16 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         findViews();
 
-        jogar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
-                startActivity(i);
-            }
+        mView = new CatLoadingView();
+        jogar.setOnClickListener(view -> {
+            mView.show(getSupportFragmentManager(), "");
+            Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
+            startActivity(i);
         });
     }
 
     public void findViews() {
         jogar = findViewById(R.id.jogar);
+
     }
 }

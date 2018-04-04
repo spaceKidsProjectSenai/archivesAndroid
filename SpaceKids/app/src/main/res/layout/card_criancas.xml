@@ -3,7 +3,9 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:radius="100dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
@@ -12,7 +14,8 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         card_view:cardCornerRadius="2dp"
-        card_view:ignore="UnusedAttribute">
+        card_view:ignore="UnusedAttribute"
+        app:cardCornerRadius="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -20,20 +23,22 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignTop="@+id/imageView4"
                 android:layout_gravity="end|end"
                 android:src="@drawable/ic_edit"
-                android:tint="@color/amareloDark"
-                android:id="@+id/imageView" />
+                android:tint="@color/amareloDark" />
 
             <ImageView
+                android:id="@+id/imageView4"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="13dp"
                 android:layout_toLeftOf="@+id/imageView"
                 android:layout_toStartOf="@+id/imageView"
                 android:src="@drawable/ic_delete"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    android:background="@color/colorWhite">
+    android:background="@drawable/background_game">
 
     <include
         layout="@layout/include_toolbar_cadastro"
@@ -17,108 +17,125 @@
 
     <!-- Layout nome -->
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:id="@+id/nome_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/nome_input"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="271dp"
+            android:layout_height="159dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/slide3" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/nome_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nome"
-            android:inputType="textPersonName"
-            android:maxLength="255"
-            />
+            android:textColorHint="#ccc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/nome_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nome"
+                android:maxLength="255"
+                android:textColor="#FFFFFF"
+                tools:ignore="TextFields" />
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/email_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
-
-        <EditText
-            android:layout_margin="20dp"
-            android:id="@+id/email_input"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/email_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:maxLength="255"
-            tools:ignore="TextFields" />
+            android:textColorHint="#ccc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/email_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:maxLength="255"
+                android:textColor="#FFFFFF"
+                tools:ignore="TextFields"
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/senha_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+                />
 
-        <EditText
-            android:layout_margin="20dp"
-            android:id="@+id/senha_input"
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/senha_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/senha"
-            android:maxLength="255"
-            tools:ignore="TextFields" />
+            android:textColorHint="#ccc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/senha_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/senha"
+                android:maxLength="255"
+                android:textColor="#FFFFFF"
+                tools:ignore="TextFields" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/confirmacao_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:layout_margin="20dp"
-            android:id="@+id/confirmacao_input"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/confirmacao_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/confirmacao"
-            android:maxLength="255"
-            tools:ignore="TextFields" />
+            android:textColorHint="#ccc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/confirmacao_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirmacao"
+                android:maxLength="255"
+                android:textColor="#FFFFFF"
+                tools:ignore="TextFields" />
 
-    <Button
-        android:id="@+id/btnCadastrar"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/amareloDark"
-        android:fontFamily="verdana"
-        android:text="@string/cadastrar"
-        tools:ignore="UnusedAttribute" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnVoltar"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorTransparentWhite"
-        android:text="@string/voltar"
-        android:layout_gravity="center"/>
+        <Button
+            android:id="@+id/btnCadastrar"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/amareloDark"
+            android:fontFamily="verdana"
+            android:text="@string/cadastrar"
+            tools:ignore="UnusedAttribute" />
 
+        <Button
+            android:id="@+id/btnVoltar"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#ffff"
+            android:backgroundTint="@color/colorTransparentWhite"
+            android:text="@string/voltar" />
+
+    </LinearLayout>
 </LinearLayout>
