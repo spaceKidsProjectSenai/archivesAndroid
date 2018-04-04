@@ -2,7 +2,6 @@ package com.example.a44602569838.spacekids.rest;
 
 import com.example.a44602569838.spacekids.model.Crianca;
 import com.example.a44602569838.spacekids.model.Desempenho;
-import com.example.a44602569838.spacekids.model.Fase;
 import com.example.a44602569838.spacekids.model.Logar;
 import com.example.a44602569838.spacekids.model.Login;
 
@@ -27,10 +26,11 @@ public interface RestInterface {
 
     /*API's Relacionadas a criança*/
 
+
     @POST("api/Crianca/cadastrar")
     Call<ResponseBody> cadastrarCrianca(@Body Crianca crianca);
 
-    @GET("/api/Crianca/listar")
+    @GET("/api/Crianca/listarporpai")
     Call<ResponseBody> listarCricancas();
 
     /*Fim API's Relacionadas a criança*/

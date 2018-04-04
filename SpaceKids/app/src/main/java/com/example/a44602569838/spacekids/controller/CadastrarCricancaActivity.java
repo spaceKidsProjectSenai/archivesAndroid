@@ -76,11 +76,11 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("spacekids", MODE_PRIVATE);
         final String tokenAuth = preferences.getString("token", "");
 
-       OkHttpClient defaultHttpClient = new OkHttpClient.Builder().addInterceptor((chain)->{
-           Request request = chain.request().newBuilder()
-                   .addHeader("Authorization", tokenAuth).build();
-           return chain.proceed(request);
-       }).build();
+        OkHttpClient defaultHttpClient = new OkHttpClient.Builder().addInterceptor((chain) -> {
+            Request request = chain.request().newBuilder()
+                    .addHeader("Authorization", tokenAuth).build();
+            return chain.proceed(request);
+        }).build();
 
         Retrofit.Builder builder = new Retrofit.Builder().client(defaultHttpClient).baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();

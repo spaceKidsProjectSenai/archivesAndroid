@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.a44602569838.spacekids.R;
 import com.example.a44602569838.spacekids.game.Fase1;
 import com.example.a44602569838.spacekids.model.Crianca;
+import com.example.a44602569838.spacekids.model.CriancaApi;
 
 import java.util.ArrayList;
 
@@ -19,9 +20,9 @@ import java.util.ArrayList;
  */
 
 public class RVAdapterCriancas extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<Crianca> cricancas;
+    private ArrayList<CriancaApi> cricancas;
 
-    public RVAdapterCriancas(ArrayList<Crianca> cricancas) {
+    public RVAdapterCriancas(ArrayList<CriancaApi> cricancas) {
         this.cricancas = cricancas;
     }
 
@@ -41,12 +42,11 @@ public class RVAdapterCriancas extends RecyclerView.Adapter<RecyclerView.ViewHol
             criancasViewHolder.sexo.setText((cricancas.get(position).getSexo()));
             criancasViewHolder.foto.setImageResource(cricancas.get(position).getSexo().equals("masculino") ? R.drawable.avatares_02 : R.drawable.avatares_01);
 
-            criancasViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(view.getContext(), Fase1.class);
-                    view.getContext().startActivity(i);
-                }
+            criancasViewHolder.itemView.setOnClickListener(view -> {
+
+                Intent i = new Intent(view.getContext(), Fase1.class);
+                i.putExtra("criancaId", cricancas.get(position).getCriancaId());
+                view.getContext().startActivity(i);
             });
 
         }

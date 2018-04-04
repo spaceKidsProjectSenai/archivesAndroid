@@ -1,16 +1,19 @@
 package com.example.a44602569838.spacekids.controller;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
 import com.example.a44602569838.spacekids.adapters.RVAdapterCriancas;
 import com.example.a44602569838.spacekids.model.Crianca;
+import com.example.a44602569838.spacekids.model.CriancaApi;
 import com.example.a44602569838.spacekids.rest.RestInterface;
 import com.roger.catloadinglibrary.CatLoadingView;
 
@@ -20,6 +23,8 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,8 +36,8 @@ public class SelecionarCriancasActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RVAdapterCriancas adapter;
-    Crianca crianca;
-    ArrayList<Crianca> criancas = new ArrayList<>();
+    CriancaApi crianca;
+    ArrayList<CriancaApi> criancas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,16 @@ public class SelecionarCriancasActivity extends AppCompatActivity {
     }
 
     public void listarCriancas() {
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
+        SharedPreferences preferences = getSharedPreferences("spacekids", MODE_PRIVATE);
+        final String tokenAuth = preferences.getString("token", "");
+
+        OkHttpClient defaultHttpClient = new OkHttpClient.Builder().addInterceptor((chain) -> {
+            Request request = chain.request().newBuilder()
+                    .addHeader("Authorization", tokenAuth).build();
+            return chain.proceed(request);
+        }).build();
+
+        Retrofit.Builder builder = new Retrofit.Builder().client(defaultHttpClient).baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         RestInterface restInterface = retrofit.create(RestInterface.class);
         Call<ResponseBody> call = restInterface.listarCricancas();
@@ -57,10 +71,12 @@ public class SelecionarCriancasActivity extends AppCompatActivity {
                 try {
                     if (response.isSuccessful()) {
                         String resposta = response.body().string();
+                        Log.d("criancas", resposta);
                         JSONArray jsonArray = new JSONArray(resposta);
 
                         for (int i = 0; i < jsonArray.length(); i++) {
-                            crianca = new Crianca();
+                            crianca = new CriancaApi();
+                            crianca.setCriancaId(jsonArray.getJSONObject(i).getInt("criancaId"));
                             crianca.setNome(jsonArray.getJSONObject(i).getString("nome"));
                             crianca.setIdade(jsonArray.getJSONObject(i).getString("idade"));
                             crianca.setSexo(jsonArray.getJSONObject(i).getString("sexo"));

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
+import com.example.a44602569838.spacekids.model.Desempenho;
+import com.example.a44602569838.spacekids.rest.RestInterface;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import es.dmoral.toasty.Toasty;
 
@@ -24,6 +43,8 @@ public class Fase1 extends AppCompatActivity {
 
     ImageView num6_vermelho, num6_verde, num6_azul;
     ImageView num_resposta;
+    Desempenho desempenho = new Desempenho();
+    int criancaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +52,13 @@ public class Fase1 extends AppCompatActivity {
         setContentView(R.layout.activity_fase1);
         findViews();
 
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            criancaId = extras.getInt("criancaId");
+        }
+        desempenho.setHoraInicial(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
     }
 
     public void findViews() {
@@ -55,6 +83,7 @@ public class Fase1 extends AppCompatActivity {
 
 
     }
+
     private final class ChoiceTouchListener implements View.OnTouchListener {
 
         @Override
@@ -92,16 +121,23 @@ public class Fase1 extends AppCompatActivity {
                     ImageView imageView = (ImageView) dragEvent.getLocalState();
                     ImageView ouvinte = (ImageView) view;
 
+                    desempenho.setCriancaID(criancaId);
+                    desempenho.setFaseID(1);
+
                     if (imageView.getId() != R.id.numero_seis) {
-                        Toasty.error(Fase1.this, "Resposta Errada !!!", Toast.LENGTH_SHORT, true).show();
-                    } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis_verde) {
+                        desempenho.setAcertou(false);
+                        Toasty.error(Fase1.this, "Ops... resposta errada", Toast.LENGTH_SHORT, true).show();
+                    } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis_verde || ouvinte.getId() == R.id.numero_seis) {
                         Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
                     } else {
-                        Toasty.success(Fase1.this, "Resposta Correta !!!", Toast.LENGTH_SHORT, true).show();
-                        Fase1.this.finish();
-                        Intent i = new Intent(getBaseContext(), Fase2.class);
-                        startActivity(i);
+                        desempenho.setAcertou(true);
+                        Toasty.success(Fase1.this, "Párabens resposta correta !!!", Toast.LENGTH_SHORT, true).show();
                     }
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    desempenho.setHoraFinal(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
+                    enviarDesempenho();
+                    Intent i = new Intent(getBaseContext(), Fase2.class);
+                    startActivity(i);
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -110,4 +146,35 @@ public class Fase1 extends AppCompatActivity {
             return true;
         }
     }
+
+    public void enviarDesempenho() {
+        SharedPreferences preferences = getSharedPreferences("spacekids", MODE_PRIVATE);
+        final String tokenAuth = preferences.getString("token", "");
+
+        OkHttpClient defaultHttpClient = new OkHttpClient.Builder().addInterceptor((chain) -> {
+            Request request = chain.request().newBuilder()
+                    .addHeader("Authorization", tokenAuth).build();
+            return chain.proceed(request);
+        }).build();
+
+        Retrofit.Builder builder = new Retrofit.Builder().client(defaultHttpClient).baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        RestInterface restInterface = retrofit.create(RestInterface.class);
+
+        Call<ResponseBody> call = restInterface.cadastrarDesempenho(desempenho);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Desempenho", desempenho.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
