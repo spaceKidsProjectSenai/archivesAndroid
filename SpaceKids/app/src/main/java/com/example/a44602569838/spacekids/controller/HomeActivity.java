@@ -1,6 +1,8 @@
 package com.example.a44602569838.spacekids.controller;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +23,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         findViews();
 
-        //dwqdqwwtt
-        mView = new CatLoadingView();
         jogar.setOnClickListener(view -> {
             mView.show(getSupportFragmentManager(), "");
             Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);

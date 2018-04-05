@@ -39,6 +39,8 @@
                 android:maxLength="255"
                 tools:ignore="TextFields"
                 android:textColor="#FFFFFF"
+                android:maxLines="1"
+                android:singleLine="true"
 
                 />
 
@@ -52,16 +54,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#ffff">
 
             <EditText
                 android:id="@+id/senha_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/senha"
+                android:inputType="textPassword"
                 android:maxLength="255"
                 tools:ignore="TextFields"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF"
+                android:maxLines="1"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 
