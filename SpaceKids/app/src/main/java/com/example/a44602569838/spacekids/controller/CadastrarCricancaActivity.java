@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
 import com.example.a44602569838.spacekids.model.Crianca;
 import com.example.a44602569838.spacekids.rest.RestInterface;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
@@ -66,7 +68,13 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         //Recupera o nome da criança
         crianca.setNome(nome.getEditableText().toString());
         //Recupera a idade da criança
-        crianca.setIdade(idade.getEditableText().toString());
+
+
+        if (idade.getText().toString().equals(10)) {
+            Toasty.error(CadastrarCricancaActivity.this, "Limite de idade ultrapassado", Toast.LENGTH_SHORT, true).show();
+        } else {
+            crianca.setIdade(idade.getEditableText().toString());
+        }
 
         crianca.setFoto("sadsadsadsaduo");
     }

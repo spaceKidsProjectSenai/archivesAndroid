@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity {
                         editor.apply();
 
                         Toasty.success(LoginActivity.this, "Bem vindo ao SpaceKids.", Toast.LENGTH_SHORT, true).show();
-                        Intent i = new Intent(getBaseContext(), HomeActivity.class);
+                        Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
                         startActivity(i);
                     }
                 } catch (IOException e) {

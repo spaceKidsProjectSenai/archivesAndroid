@@ -23,7 +23,6 @@
         <activity android:name=".controller.LoginActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".game.Fase1" />
         <activity android:name=".game.Fase2" />
-        <activity android:name=".controller.HomeActivity" />
         <activity android:name=".controller.SelecionarCriancasActivity" />
         <activity android:name=".controller.CadastrarCricancaActivity"></activity>
     </application>
