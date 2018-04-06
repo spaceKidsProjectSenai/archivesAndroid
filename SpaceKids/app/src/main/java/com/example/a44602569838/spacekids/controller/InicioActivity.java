@@ -42,20 +42,16 @@ public class InicioActivity extends BaseActivity {
 
 
         //Chama a tela de cadastro quando clicado no botão
-        btnCadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent cadastro = new Intent(getBaseContext(), CadastroActivity.class);
-                startActivity(cadastro);
-            }
+        btnCadastro.setOnClickListener(view -> {
+            Intent cadastro = new Intent(getBaseContext(), CadastroActivity.class);
+            startActivity(cadastro);
+            finish();
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent login = new Intent(getBaseContext(), LoginActivity.class);
-                startActivity(login);
-            }
+        btnLogin.setOnClickListener(view -> {
+            Intent login = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(login);
+            finish();
         });
     }
 

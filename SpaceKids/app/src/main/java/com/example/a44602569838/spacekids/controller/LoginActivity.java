@@ -83,6 +83,7 @@ public class LoginActivity extends BaseActivity {
                         Toasty.success(LoginActivity.this, "Bem vindo ao SpaceKids.", Toast.LENGTH_SHORT, true).show();
                         Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toasty.error(LoginActivity.this, "Login ou senha incorretos.", Toast.LENGTH_SHORT, true).show();
+                Toasty.error(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT, true).show();
             }
         });
     }

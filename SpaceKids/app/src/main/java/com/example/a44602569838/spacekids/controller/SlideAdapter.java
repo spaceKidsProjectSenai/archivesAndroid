@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,8 +40,8 @@ public class SlideAdapter extends PagerAdapter{
 
     public String[] slide_descs = {
       "Na Space Kids, você pode proporcionar muita diversão para o seu filho.",
-      "                    Acompanhe o desempenho do seu filho.",
-      "         Cadastre-se e adicione quantos jogadores quiser"
+      "Acompanhe o desempenho do seu filho.",
+      "Cadastre-se e adicione quantos jogadores quiser"
 
     };
 
@@ -51,7 +52,7 @@ public class SlideAdapter extends PagerAdapter{
 
     @Override
     public boolean isViewFromObject(View view, Object o) {
-        return view == (RelativeLayout) o;
+        return view == o;
 
     }
 
@@ -78,7 +79,7 @@ public class SlideAdapter extends PagerAdapter{
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((RelativeLayout)object);
+        container.removeView((LinearLayout)object);
 
     }
 }

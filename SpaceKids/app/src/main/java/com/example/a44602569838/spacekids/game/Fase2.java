@@ -1,7 +1,9 @@
 package com.example.a44602569838.spacekids.game;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,13 +14,32 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
+import com.example.a44602569838.spacekids.controller.SelecionarCriancasActivity;
+import com.example.a44602569838.spacekids.model.Desempenho;
+import com.example.a44602569838.spacekids.rest.RestInterface;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.github.javiersantos.materialstyleddialogs.enums.Style;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import es.dmoral.toasty.Toasty;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fase2 extends AppCompatActivity {
 
     ImageView num6_vermelho, num6_verde, num6_azul;
     ImageView num_resposta;
+    Desempenho desempenho = new Desempenho();
+    int criancaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +47,8 @@ public class Fase2 extends AppCompatActivity {
         setContentView(R.layout.activity_fase2);
 
         findViews();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        desempenho.setHoraInicial(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
     }
 
     public void findViews() {
@@ -85,16 +108,65 @@ public class Fase2 extends AppCompatActivity {
                     ImageView imageView = (ImageView) dragEvent.getLocalState();
                     ImageView ouvinte = (ImageView) view;
 
-                    if (imageView.getId() != R.id.numero_seis_verde) {
-                        Toasty.error(Fase2.this, "Resposta Errada !!!", Toast.LENGTH_SHORT, true).show();
-                    } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis || ouvinte.getId() == R.id.numero_seis_verde) {
-                        Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
+
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    if (imageView.getId() == R.id.numero_seis_verde) {
+                        if (ouvinte.getId() != R.id.numero_seis_azul && ouvinte.getId() != R.id.numero_seis_verde && ouvinte.getId() != R.id.numero_seis) {
+                            desempenho.setAcertou(true);
+                            desempenho.setCriancaID(criancaId);
+                            desempenho.setFaseID(2);
+                            desempenho.setHoraFinal(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
+                            enviarDesempenho();
+                            new MaterialStyledDialog.Builder(Fase2.this)
+                                    .setTitle("Fántastico !!!")
+                                    .setDescription("Parabéns você acertou por favor ir para a próxima fase")
+                                    .setIcon(R.drawable.trofeu)
+                                    .setPositiveText("Próximo")
+                                    .onPositive((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), Fase2.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setCancelable(false)
+                                    .setNegativeText("Sair")
+                                    .onNegative((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setHeaderColor(R.color.verde)
+                                    .setStyle(Style.HEADER_WITH_ICON).show();
+                        }
                     } else {
-                        Toasty.success(Fase2.this, "Resposta Correta !!!", Toast.LENGTH_SHORT, true).show();
-                        Fase2.this.finish();
-                        Intent i = new Intent(getBaseContext(), Fase2.class);
-                        startActivity(i);
+                        if (ouvinte.getId() != R.id.numero_seis_azul && ouvinte.getId() != R.id.numero_seis_verde && ouvinte.getId() != R.id.numero_seis && ouvinte.getId() != R.id.numero_q_3) {
+                            desempenho.setAcertou(false);
+                            desempenho.setCriancaID(criancaId);
+                            desempenho.setFaseID(2);
+                            desempenho.setHoraFinal(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
+                            enviarDesempenho();
+                            new MaterialStyledDialog.Builder(Fase2.this)
+                                    .setTitle("Ops...")
+                                    .setDescription("Que pena você errou por favor ir para a próxima fase")
+                                    .setIcon(R.drawable.ic_error_outline_white_48dp)
+                                    .setPositiveText("Próximo")
+                                    .onPositive((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), Fase2.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setCancelable(false)
+                                    .setNegativeText("Sair")
+                                    .onNegative((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setHeaderColor(R.color.vermelho)
+                                    .setStyle(Style.HEADER_WITH_ICON).show();
+                        }
                     }
+
+
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -102,5 +174,35 @@ public class Fase2 extends AppCompatActivity {
             }
             return true;
         }
+    }
+
+    public void enviarDesempenho() {
+        SharedPreferences preferences = getSharedPreferences("spacekids", MODE_PRIVATE);
+        final String tokenAuth = preferences.getString("token", "");
+
+        OkHttpClient defaultHttpClient = new OkHttpClient.Builder().addInterceptor((chain) -> {
+            Request request = chain.request().newBuilder()
+                    .addHeader("Authorization", tokenAuth).build();
+            return chain.proceed(request);
+        }).build();
+
+        Retrofit.Builder builder = new Retrofit.Builder().client(defaultHttpClient).baseUrl("http://spacekids-001-site1.dtempurl.com").addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        RestInterface restInterface = retrofit.create(RestInterface.class);
+
+        Call<ResponseBody> call = restInterface.cadastrarDesempenho(desempenho);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Desempenho", desempenho.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

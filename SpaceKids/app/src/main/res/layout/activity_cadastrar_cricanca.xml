@@ -42,7 +42,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="20dp"
+        android:checkedButton="@id/radio_masculino"
+        android:id="@+id/radio_group">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,13 +56,11 @@
             android:id="@+id/radio_masculino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="@string/masculino" />
 
         <RadioButton
             android:layout_gravity="center"
             android:id="@+id/radio_feminino"
-            android:onClick="onRadioButtonClicked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ninjas" />

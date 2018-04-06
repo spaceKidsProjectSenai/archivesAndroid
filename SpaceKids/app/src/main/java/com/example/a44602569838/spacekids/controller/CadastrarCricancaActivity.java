@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.a44602569838.spacekids.R;
@@ -29,8 +30,9 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
     //
     EditText nome;
     EditText idade;
+    RadioButton feminino, masculino;
     //
-    String sexo;
+    String genero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +43,10 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         nome = findViewById(R.id.nome_crianca);
         idade = findViewById(R.id.idade_crianca);
 
-        //Chama o método que recupera as informações
-    }
+        feminino = findViewById(R.id.radio_feminino);
+        masculino = findViewById(R.id.radio_masculino);
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.radio_masculino:
-                if (checked)
-                    sexo = ("masculino");
-                    break;
-            case R.id.radio_feminino:
-                    sexo = ("feminino");
-                if (checked)
-                    break;
-        }
+        //Chama o método que recupera as informações
     }
 
 
@@ -63,14 +54,20 @@ public class CadastrarCricancaActivity extends AppCompatActivity {
         //Cria criança
         crianca = new Crianca();
 
-        //Da o sexo da criança
-        crianca.setSexo(sexo);
+        if (feminino.isChecked()){
+            crianca.setSexo("feminino");
+            masculino.setChecked(false);
+        }else{
+            crianca.setSexo("masculino");
+            feminino.setChecked(false);
+        }
+
         //Recupera o nome da criança
         crianca.setNome(nome.getEditableText().toString());
         //Recupera a idade da criança
 
 
-        if (idade.getText().toString().equals(10)) {
+        if (Integer.parseInt(idade.getEditableText().toString()) >= 10) {
             Toasty.error(CadastrarCricancaActivity.this, "Limite de idade ultrapassado", Toast.LENGTH_SHORT, true).show();
         } else {
             crianca.setIdade(idade.getEditableText().toString());

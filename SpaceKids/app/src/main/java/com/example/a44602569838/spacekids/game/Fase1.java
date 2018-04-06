@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,9 +18,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.a44602569838.spacekids.R;
+import com.example.a44602569838.spacekids.controller.SelecionarCriancasActivity;
 import com.example.a44602569838.spacekids.model.Desempenho;
 import com.example.a44602569838.spacekids.rest.RestInterface;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.github.javiersantos.materialstyleddialogs.enums.Style;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -121,23 +127,67 @@ public class Fase1 extends AppCompatActivity {
                     ImageView imageView = (ImageView) dragEvent.getLocalState();
                     ImageView ouvinte = (ImageView) view;
 
-                    desempenho.setCriancaID(criancaId);
-                    desempenho.setFaseID(1);
 
-                    if (imageView.getId() != R.id.numero_seis) {
-                        desempenho.setAcertou(false);
-                        Toasty.error(Fase1.this, "Ops... resposta errada", Toast.LENGTH_SHORT, true).show();
-                    } else if (ouvinte.getId() == R.id.numero_seis_azul || ouvinte.getId() == R.id.numero_seis_verde || ouvinte.getId() == R.id.numero_seis) {
-                        Log.d("FUNFO", String.valueOf(ouvinte.getContentDescription()));
-                    } else {
-                        desempenho.setAcertou(true);
-                        Toasty.success(Fase1.this, "Párabens resposta correta !!!", Toast.LENGTH_SHORT, true).show();
-                    }
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    desempenho.setHoraFinal(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
-                    enviarDesempenho();
-                    Intent i = new Intent(getBaseContext(), Fase2.class);
-                    startActivity(i);
+                    if (imageView.getId() == R.id.numero_seis) {
+                        if (ouvinte.getId() != R.id.numero_seis_azul && ouvinte.getId() != R.id.numero_seis_verde && ouvinte.getId() != R.id.numero_seis) {
+                            desempenho.setAcertou(true);
+                            desempenho.setCriancaID(criancaId);
+                            desempenho.setFaseID(1);
+                            desempenho.setHoraFinal(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
+                            enviarDesempenho();
+                            new MaterialStyledDialog.Builder(Fase1.this)
+                                    .setTitle("Fántastico !!!")
+                                    .setDescription("Parabéns você acertou por favor ir para a próxima fase")
+                                    .setIcon(R.drawable.trofeu)
+                                    .setPositiveText("Próximo")
+                                    .onPositive((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), Fase2.class);
+                                        i.putExtra("criancaId", criancaId);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setCancelable(false)
+                                    .setNegativeText("Sair")
+                                    .onNegative((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setHeaderColor(R.color.verde)
+                                    .setStyle(Style.HEADER_WITH_ICON).show();
+                        }
+                    } else {
+                        if (ouvinte.getId() != R.id.numero_seis_azul && ouvinte.getId() != R.id.numero_seis_verde && ouvinte.getId() != R.id.numero_seis && ouvinte.getId() != R.id.numero_q_3) {
+                            desempenho.setAcertou(false);
+                            desempenho.setCriancaID(criancaId);
+                            desempenho.setFaseID(1);
+                            desempenho.setHoraFinal(df.format(new Date(Calendar.getInstance().getTimeInMillis())));
+                            enviarDesempenho();
+                            new MaterialStyledDialog.Builder(Fase1.this)
+                                    .setTitle("Ops...")
+                                    .setDescription("Que pena você errou por favor va para a próxima fase")
+                                    .setIcon(R.drawable.ic_error_outline_white_48dp)
+                                    .setPositiveText("Próximo")
+                                    .onPositive((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), Fase2.class);
+                                        i.putExtra("criancaId", criancaId);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setCancelable(false)
+                                    .setNegativeText("Sair")
+                                    .onNegative((dialog, which) -> {
+                                        Intent i = new Intent(getBaseContext(), SelecionarCriancasActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .setHeaderColor(R.color.vermelho)
+                                    .setStyle(Style.HEADER_WITH_ICON).show();
+                        }
+                    }
+
+
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
